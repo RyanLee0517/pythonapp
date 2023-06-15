@@ -33,6 +33,16 @@
         state: present
       become: true
 
+    - name: Install pip package manager
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install Docker Python library
+      pip:
+        name: docker
+        state: present
+
     - name: Start and enable Docker service
       systemd:
         name: docker
@@ -51,4 +61,5 @@
         state: started
         restart_policy: always
         ports:
-          - "80:8080"
+          - "80:5000"
+      become: true
